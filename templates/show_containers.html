@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% for entry in entries %}
+    {{ entry.title }}{ entry.text|safe }
+  {% else %}
+    <li><em>Unbelievable.  No containers found</em></li>
+  {% endfor %}
+{% endblock %}
