@@ -1,8 +1,12 @@
 {% extends "layout.html" %}
 {% block body %}
-  {% for entry in entries %}
-    {{ entry.title }}{ entry.text|safe }
-  {% else %}
-    <li><em>Unbelievable.  No containers found</em></li>
+  <div class="containers">
+    {% for entry in entries %}
+       <div class="containerRow">
+           <span class="container">{{ entry.container }}</span><span class="status">{{ entry.status }}</span>
+       </div>
+    {% else %}
+       <li><em>Unbelievable.  No containers found</em></li>
+  </div>
   {% endfor %}
 {% endblock %}
