@@ -1,34 +1,17 @@
-import subprocess
 import argparse 
 from flask import Flask, render_template
 import pdb
+from resolvers import getRunningContainers, getImages
 
 app = Flask(__name__)
 noDocker = False
 
-def getRunningContainers():
-    output = []
-    psCommand = subprocess.Popen("/usr/bin/docker ps --format '{{.Names}}:   {{.Status}}'", shell=True, stdout=subprocess.PIPE)
-    while True:
-        line = psCommand.stdout.readline()
-        if line == '' or psCommand.poll() is not None:
-            break
-        if line:
-            output.append(line.decode('utf-8').strip())
-    retVal = []
-    for i in output:
-        c, u = i.split(':')
-        retVal.append({ "container": c, "status": u})
-    
-    if noDocker:
-        return [ { "container": "adminapi", "status": "up" }, { "container":"netezzaapi", "status":"exited"}]
-    else:
-        return retVal
-
 
 @app.route('/')
 def hello():
-    return render_template("show_containers.html", entries=getRunningContainers())
+    images = getImages()
+    containers = getRunningContainers()
+    return render_template("main.html", images = images, containers = containers)
 
 
 if __name__ == '__main__':

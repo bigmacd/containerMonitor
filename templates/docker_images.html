@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+  <div class="images">
+    {% for entry in entries %}
+       <div class="imageRow">
+           <span class="image">{{ entry.container }}</span><span class="status">{{ entry.status }}</span>
+       </div>
+    {% else %}
+       <li><em>Unbelievable.  No containers found</em></li>
+  </div>
+  {% endfor %}
+{% endblock %}
