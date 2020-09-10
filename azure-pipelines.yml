@@ -11,7 +11,7 @@ variables:
   azureServiceConnectionId: 'e3ab44be-1753-4b96-8944-62ef5cc4e360'
   
   # Web app name
-  webAppName: 'containerMonitor'
+  webAppName: 'containerMonitor9'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
