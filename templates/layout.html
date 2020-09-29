@@ -1,6 +1,13 @@
 <!doctype html>
 <title>Docker Status</title>
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-<div class="page">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<nav>
+  <div class="nav-wrapper">
+    <a href="#!" class="brand-logo right">Logo</a>
+    <ul id="nav-mobile" class="left hid-on-med-and-down">
+      <li><a href="/images">Images</a></li>
+      <li><a href="/containers">Containers</a></li>
+    </ul>
+  </div>
+</nav>
   {% block body %}{% endblock %}
-</div>

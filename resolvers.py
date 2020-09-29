@@ -7,14 +7,14 @@ def runCommand(command: str) -> list:
     psCommand = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
     while True:
         line = psCommand.stdout.readline()
-        if line == '' or psCommand.poll() is not None:
-            break
         if line:
             output.append(line.decode('utf-8').strip())
+        if line == '' or psCommand.poll() is not None:
+            break
     return output
 
 def getRunningContainers():
-    command = "/usr/bin/docker ps --format '{{.Names}}:   {{.Status}}'"
+    command = "/usr/local/bin/docker ps --format '{{.Names}}:   {{.Status}}'"
     output = runCommand(command)
     retVal = []
     for i in output:
@@ -25,7 +25,7 @@ def getRunningContainers():
 
 
 def getImages():
-    imageCommand = "/usr/bin/docker image ls --format '{{.Repository}}!{{.ID}}!{{.Tag}}!{{.CreatedAt}}!{{.Size}}'"
+    imageCommand = "/usr/local/bin/docker image ls --format '{{.Repository}}!{{.ID}}!{{.Tag}}!{{.CreatedAt}}!{{.Size}}'"
     output = runCommand(imageCommand)
     retVal = []
     for i in output:
@@ -35,4 +35,11 @@ def getImages():
                         "tag": tag,
                         "createdAt": created,
                         "size": size })
+    if len(retVal) % 2 != 0:
+        retVal.append({ "repository": '',
+                        "imageId": '',
+                        "tag": '',
+                        "createdAt": '',
+                        "size": '' })
+
     return retVal

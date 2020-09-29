@@ -1,26 +1,32 @@
 {% extends "layout.html" %}
 {% block body %}
-  <div class="containers">
-    {% for container in containers %}
-       <div class="containerRow">
-           <span class="container">{{ container.container }}</span><span class="status">{{ container.status }}</span>
-       </div>
-    {% else %}
-       <li><em>Unbelievable.  No containers found</em></li>
-    {% endfor %}
-  </div>
-  <div class="images">
-    {% for image in images %}
-       <div class="imagesRow">
-           <span class="repository">{{ image.repository }}</span>
-           <span class="tag">{{ image.imageId }}</span>
-           <span class="imageId">{{ image.tag }}</span>
-           <span class="created">{{ image.createdAt }}</span>
-           <span class="imageSize">{{ image.size }}</span>
-       </div>
-    {% else %}
-       <li><em>Unbelievable.  No images found</em></li>
-  </div>
-  {% endfor %}
+<div class="container">
+  <div class="row">
 
+    <div class="col s6">Containers</div>
+    <div class="col s6">Images</div>
+
+      <div class="col s6">
+        {% for container in containers %}
+           <span class="container">{{ container.container }}</span><span class="status">{{ container.status }}</span>
+        {% else %}
+            <li><em>Unbelievable.  No containers found</em></li>
+        {% endfor %}
+      </div>
+
+
+    <div class="col s6">
+        {% for image in images %}
+          <span class="repository">{{ image.repository }}</span>
+          <span class="tag">{{ image.imageId }}</span>
+          <span class="imageId">{{ image.tag }}</span>
+          <span class="created">{{ image.createdAt }}</span>
+          <span class="imageSize">{{ image.size }}</span>
+        {% else %}
+          <li><em>Unbelievable.  No images found</em></li>
+        {% endfor %}
+    </div>
+
+  </div>
+</div>
 {% endblock %}
